@@ -21,13 +21,13 @@ public class Application {
   }
 
   @Bean
-	public CommandLineRunner demo(WidgetRepository repository) {
-		return (args) -> {
-      log.info("=============Saving Widgets==============================");
-			repository.save(new Widget("Jack", LocalDate.of(2018, Month.MAY, 17)));
-			repository.save(new Widget("Jill", LocalDate.of(2019, Month.MAY, 17)));
-      repository.save(new Widget("Rob", LocalDate.of(2020, Month.MAY, 17)));
-      repository.save(new Widget("Bill", LocalDate.of(2021, Month.MAY, 17)));
-		};
-	}
+    public CommandLineRunner demo(WidgetRepository repository) {
+      return (args) -> {
+        log.info("=============Saving Widgets==============================");
+        repository.save(new Widget("Jack", LocalDate.of(2018, Month.MAY, 17)));
+        repository.save(new Widget("Jill", LocalDate.of(2019, Month.MAY, 17)));
+        repository.save(new Widget("Rob", LocalDate.of(2020, Month.MAY, 17)));
+        repository.save(new Widget("Bill", LocalDate.of(2021, Month.MAY, 17)));
+    };
+  }
 }
