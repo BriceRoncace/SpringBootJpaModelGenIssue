@@ -41,10 +41,53 @@
       <artifactId>h2</artifactId>
     </dependency>
     
-    <dependency>
+<!--<dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-jpamodelgen</artifactId>
-    </dependency>
+    </dependency>-->
   </dependencies>
   
+  <build>
+    <plugins>
+      
+      <!--  
+         Appears to work without disable annotation processing for the compiler plugin 
+         see https://docs.jboss.org/hibernate/orm/5.0/topical/html/metamodelgen/MetamodelGenerator.html
+ 	      <plugin>
+ 	        <artifactId>maven-compiler-plugin</artifactId>
+ 	        <configuration>
+ 	          <compilerArgument>-proc:none</compilerArgument>
+ 	        </configuration>
+ 	      </plugin> 
+      -->
+      
+      <plugin>
+        <groupId>org.bsc.maven</groupId>
+        <artifactId>maven-processor-plugin</artifactId>
+        <version>3.3.3</version>
+        <executions>
+          <execution>
+            <id>process</id>
+            <goals>
+              <goal>process</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <processors>                                
+                <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
+              </processors>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
+            <version>5.2.17.Final</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      
+    </plugins>
+  </build>
 </project>
